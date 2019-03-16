@@ -4,7 +4,7 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/clock
+    url: jdbc:mysql://127.0.0.1:3306/clocking
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源其他配置
     initialSize: 5
@@ -27,3 +27,6 @@ spring:
 mybatis:
   # 指定sql映射文件位置
   mapper-locations: classpath:mapping/*.xml
+  #mybatis
+  type-aliases-package: tk.mybatis.springboot.model
+
