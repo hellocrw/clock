@@ -1,12 +1,12 @@
 spring:
   datasource:
-    #   Êı¾İÔ´»ù±¾ÅäÖÃ
+    #   æ•°æ®æºåŸºæœ¬é…ç½®
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/clock
     type: com.alibaba.druid.pool.DruidDataSource
-    #   Êı¾İÔ´ÆäËûÅäÖÃ
+    #   æ•°æ®æºå…¶ä»–é…ç½®
     initialSize: 5
     minIdle: 5
     maxActive: 20
@@ -18,12 +18,12 @@ spring:
     testOnBorrow: false
     testOnReturn: false
     poolPreparedStatements: true
-    #   ÅäÖÃ¼à¿ØÍ³¼ÆÀ¹½ØµÄfilters£¬È¥µôºó¼à¿Ø½çÃæsqlÎŞ·¨Í³¼Æ£¬'wall'ÓÃÓÚ·À»ğÇ½
+    #   é…ç½®ç›‘æ§ç»Ÿè®¡æ‹¦æˆªçš„filtersï¼Œå»æ‰åç›‘æ§ç•Œé¢sqlæ— æ³•ç»Ÿè®¡ï¼Œ'wall'ç”¨äºé˜²ç«å¢™
     filters: stat,wall,log4j
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
 mybatis:
-  # Ö¸¶¨sqlÓ³ÉäÎÄ¼şÎ»ÖÃ
+  # æŒ‡å®šsqlæ˜ å°„æ–‡ä»¶ä½ç½®
   mapper-locations: classpath:mapping/*.xml
