@@ -13,7 +13,7 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
     private UserInfoMapper userInfoMapper;
-    private UserServiceImpl(UserInfoMapper userInfoMapper)
+    public UserServiceImpl(UserInfoMapper userInfoMapper)
     {
         this.userInfoMapper=userInfoMapper;
     }
