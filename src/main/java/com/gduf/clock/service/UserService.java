@@ -1,5 +1,7 @@
 package com.gduf.clock.service;
 
+import com.gduf.clock.entity.UserInfo;
+
 public interface UserService {
-    void userLogin(String encryptedData, String iv, String code);
+    UserInfo userLogin(String encryptedData, String iv, String code);
 }
