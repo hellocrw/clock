@@ -10,16 +10,18 @@ import com.gduf.clock.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
     private UserInfoMapper userInfoMapper;
+
     public UserServiceImpl(UserInfoMapper userInfoMapper)
     {
         this.userInfoMapper=userInfoMapper;
     }
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public UserInfo userLogin(String encryptedData, String iv, String code) {
         //解密
         Map map = UserInfoDecode.decode(encryptedData,iv,code);
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
             }
             else
             {
+                userInfo.setTime(new Date());
                 //插入新用户
                 userInfoMapper.insert(userInfo);
             }

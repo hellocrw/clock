@@ -31,4 +31,6 @@ mybatis:
   #mybatis
   type-aliases-package: tk.mybatis.springboot.model
 
-
+web:
+  upload:
+    path: e://wechat/

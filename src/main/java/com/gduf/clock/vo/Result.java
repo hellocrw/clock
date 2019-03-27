@@ -11,6 +11,9 @@ public class Result<T> {
     public Result() {
         super();
     }
+    public Result( String msg) {
+        this.msg = msg;
+    }
     public Result(Integer code, String msg) {
         this.code = code;
         this.msg = msg;

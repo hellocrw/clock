@@ -1,20 +1,22 @@
 package com.gduf.clock.controller;
 
-
-import com.alibaba.fastjson.JSONObject;
 import com.gduf.clock.entity.UserInfo;
 import com.gduf.clock.service.UserService;
 import com.gduf.clock.service.impl.UserServiceImpl;
 import com.gduf.clock.vo.Result;
+
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.HashMap;
-
+@Slf4j
 @RestController
 public class UserController {
     private UserService userService;
@@ -24,28 +26,35 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "login",produces = "application/json")
     @ApiOperation(value="微信用户登陆", notes="微信用户登陆")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "encryptedData", value = "encryptedData", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "iv", value = "iv", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "code", value = "code", required = true, dataType = "String")
-    })
-    public ResponseEntity<String> login(@RequestBody JSONObject jsonParam) {
-        String encryptedData = jsonParam.getString("encryptedData");
-        String iv = jsonParam.getString("iv");
-        String code = jsonParam.getString("code");
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name="encryptedData",dataType = "String",paramType = "query"),
+                    @ApiImplicitParam(name="iv",dataType = "String",paramType = "query"),
+                    @ApiImplicitParam(name="code",dataType = "String",paramType = "query")
+            }
+    )
+    public ResponseEntity<String> login(String encryptedData,String iv,String code) {
         Result result;
         HashMap jsonData=new HashMap(16);
+        if(StringUtil.isEmpty(encryptedData)||StringUtil.isEmpty(iv)||StringUtil.isEmpty(code))
+        {
+            return new ResponseEntity(new Result("参数不能为空"),HttpStatus.NO_CONTENT);
+        }
 
         try {
             UserInfo userInfo=userService.userLogin(encryptedData, iv, code);
             jsonData.put("openid", userInfo.getOpenId());
             result = new Result(200, "success",jsonData);
+            return new ResponseEntity(result, HttpStatus.OK);
         } catch (Exception e) {
-            result = new Result(500, "error");
+            log.info(e.toString());
+            return new ResponseEntity(new Result("服务器错误"),HttpStatus.FAILED_DEPENDENCY);
         }
-        return new ResponseEntity(result, HttpStatus.OK);
+
+
+
     }
 
 }
