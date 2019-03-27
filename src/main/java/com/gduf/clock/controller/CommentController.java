@@ -24,8 +24,8 @@ public class CommentController {
     }
     @RequestMapping(value = "uploadImage")
     public void uploadImage(@RequestParam("file") MultipartFile[] files,
-                          @RequestParam("commToImg") String commentToImg)
+                          @RequestParam("commentMap") String commentMap)
     {
-        commentService.uploadImage(files,commentToImg);
+        commentService.uploadImage(files,commentMap);
     }
 }

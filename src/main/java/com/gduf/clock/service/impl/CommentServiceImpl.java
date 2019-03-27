@@ -1,15 +1,25 @@
 package com.gduf.clock.service.impl;
 
+import com.gduf.clock.dao.ImageInfoMapper;
+import com.gduf.clock.dao.SpeechInfoMapper;
+import com.gduf.clock.dao.VideoInfoMapper;
+import com.gduf.clock.entity.ImageInfo;
+import com.gduf.clock.entity.SpeechInfo;
+import com.gduf.clock.entity.VideoInfo;
 import com.gduf.clock.service.CommentService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.util.StringUtil;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created with IDEA
@@ -19,25 +29,66 @@ import java.io.IOException;
  */
 @Service
 public class CommentServiceImpl implements CommentService {
-    @Value("${web.upload.path}")
-    private String uploadPath;
+    ImageInfoMapper imageInfoMapper;
+    SpeechInfoMapper speechInfoMapper;
+    VideoInfoMapper videoInfoMapper;
+    public CommentServiceImpl(ImageInfoMapper imageInfoMapper, VideoInfoMapper videoInfoMapper, SpeechInfoMapper speechInfoMapper)
+    {
+        this.imageInfoMapper=imageInfoMapper;
+        this.speechInfoMapper=speechInfoMapper;
+        this.videoInfoMapper=videoInfoMapper;
+    }
+
+    @Value("${web.upload.imgPath}")
+    private String imgPath;
+
+    @Value("${web.upload.videoPath}")
+    private String videoPath;
+
+    @Value("${web.upload.speechPath}")
+    private String speechPath;
+
+
+
     @Override
-    public void uploadImage(MultipartFile[] files, String commentToImage) {
-        upload(files);
+    @Transactional(readOnly = true,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void uploadImage(MultipartFile[] files, String commentMap) {
+        //保存图片
+        upload(files,imgPath);
+        ImageInfo imageInfo=ImageInfo.builder()
+                .commentMap(commentMap)
+                .id(UUID.randomUUID().toString())
+                .time(new Date())
+                .build();
+        imageInfoMapper.insert(imageInfo);
     }
 
     @Override
-    public void uploadVideo(MultipartFile[] files, String commentToImage) {
-
+    public void uploadVideo(MultipartFile[] files, String commentMap) {
+        //保存录像
+        upload(files,videoPath);
+        VideoInfo videoInfo=VideoInfo.builder()
+                .commentMap(commentMap)
+                .id(UUID.randomUUID().toString())
+                .time(new Date())
+                .build();
+        videoInfoMapper.insert(videoInfo);
     }
 
     @Override
-    public void uploadSpeech(MultipartFile[] files, String commentToImage) {
-
+    public void uploadSpeech(MultipartFile[] files, String commentMap) {
+        //保存语音
+        upload(files,speechPath);
+        SpeechInfo speechInfo=SpeechInfo.builder()
+                .commentMap(commentMap)
+                .id(UUID.randomUUID().toString())
+                .time(new Date())
+                .build();
+        speechInfoMapper.insert(speechInfo);
     }
 
 
-    public void upload(MultipartFile[] files)
+    public void upload(MultipartFile[] files,String uploadPath)
     {
         //多文件上传
         if(files!=null && files.length>=1) {

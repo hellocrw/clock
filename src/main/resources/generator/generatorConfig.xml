@@ -29,8 +29,9 @@
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="user_info">
+        <!--<table tableName="user_info"/> -->
 
-        </table>
+        <table tableName="video_info"/>
+        <table tableName="speech_info"/>
     </context>
 </generatorConfiguration>

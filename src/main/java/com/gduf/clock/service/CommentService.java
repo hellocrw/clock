@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Time:11:05
  */
 public interface CommentService {
-    void uploadImage(MultipartFile[] files,String commentToImage);
-    void uploadVideo(MultipartFile[] files,String commentToImage);
-    void uploadSpeech(MultipartFile[] files,String commentToImage);
+    void uploadImage(MultipartFile[] files,String commentMap);
+    void uploadVideo(MultipartFile[] files,String commentMap);
+    void uploadSpeech(MultipartFile[] files,String commentMap);
 }
