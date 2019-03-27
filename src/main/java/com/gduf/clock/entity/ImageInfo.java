@@ -3,8 +3,10 @@ package com.gduf.clock.entity;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "image_info")
 @Builder

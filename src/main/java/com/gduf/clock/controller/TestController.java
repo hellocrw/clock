@@ -11,8 +11,7 @@ public class TestController {
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     @ResponseBody
-    public Object sayHello()
-    {
+    public Object sayHello() {
         return "hello";
     }
 }

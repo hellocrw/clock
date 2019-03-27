@@ -2,8 +2,10 @@ package com.gduf.clock.entity;
 
 import lombok.Builder;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "diary_comment")
 @Builder

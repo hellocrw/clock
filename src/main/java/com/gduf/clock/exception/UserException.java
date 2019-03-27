@@ -9,6 +9,7 @@ public class UserException extends RuntimeException {
 
     /**
      * 构造函数
+     *
      * @param errMsg 异常消息
      */
     public UserException(String errMsg) {
@@ -17,6 +18,7 @@ public class UserException extends RuntimeException {
 
     /**
      * 构造函数
+     *
      * @param cause 原始异常
      */
     public UserException(Throwable cause) {
@@ -25,8 +27,9 @@ public class UserException extends RuntimeException {
 
     /**
      * 构造函数
+     *
      * @param errMsg 异常消息
-     * @param cause 原始异常
+     * @param cause  原始异常
      */
     public UserException(String errMsg, Throwable cause) {
         super(errMsg, cause);

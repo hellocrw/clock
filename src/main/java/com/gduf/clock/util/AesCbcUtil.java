@@ -1,4 +1,5 @@
 package com.gduf.clock.util;
+
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -10,7 +11,6 @@ import java.security.Security;
 
 
 /**
- *
  * AES-128-CBC 加密方式
  * 注：
  * AES-128-CBC可以自己定义“密钥”和“偏移量“。
@@ -26,9 +26,9 @@ public class AesCbcUtil {
     /**
      * AES解密
      *
-     * @param data      //密文，被加密的数据
-     * @param key      //秘钥
-     * @param iv       //偏移量
+     * @param data           //密文，被加密的数据
+     * @param key            //秘钥
+     * @param iv             //偏移量
      * @param encodingFormat //解密后的结果需要进行的编码
      * @return
      * @throws Exception

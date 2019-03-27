@@ -5,7 +5,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
-
 import java.sql.SQLException;
 
 @Configuration
@@ -68,10 +66,9 @@ public class DruidConfig {
     private String filters;
 
 
-
     @Bean
     @Primary
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         //@Primary 注解作用是当程序选择dataSource时选择被注解的这个
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(dbUrl);

@@ -4,7 +4,6 @@ import com.gduf.clock.entity.UserInfo;
 
 public interface UserService {
     /**
-     *
      * @param encryptedData
      * @param iv
      * @param code

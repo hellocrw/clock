@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.util.*;
 
 public class Request {
-    public static CloseableHttpResponse get(String url)
-    {
-        return get(url,null);
+    public static CloseableHttpResponse get(String url) {
+        return get(url, null);
     }
+
     public static CloseableHttpResponse get(String url, HashMap<String, String> headers) {
         HttpClient client = HttpClients.createDefault();
         CloseableHttpResponse response = null;

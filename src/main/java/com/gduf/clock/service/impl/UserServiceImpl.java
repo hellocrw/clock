@@ -12,44 +12,38 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
     private UserInfoMapper userInfoMapper;
 
-    public UserServiceImpl(UserInfoMapper userInfoMapper)
-    {
-        this.userInfoMapper=userInfoMapper;
+    public UserServiceImpl(UserInfoMapper userInfoMapper) {
+        this.userInfoMapper = userInfoMapper;
     }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public UserInfo userLogin(String encryptedData, String iv, String code) {
         //解密
-        Map map = UserInfoDecode.decode(encryptedData,iv,code);
-        String status=map.get("status").toString();
-        if (StringUtils.equals(status,"1"))
-        {
+        Map map = UserInfoDecode.decode(encryptedData, iv, code);
+        String status = map.get("status").toString();
+        if (StringUtils.equals(status, "1")) {
             //处理
-            UserInfo userInfo= JSONObject.parseObject(JSONObject.toJSONString(map.get("userInfo")).toString(),UserInfo.class);
+            UserInfo userInfo = JSONObject.parseObject(JSONObject.toJSONString(map.get("userInfo")).toString(), UserInfo.class);
 
-            UserInfo userTemp=userInfoMapper.selectByPrimaryKey(userInfo);
-            if(userTemp!=null)
-            {
+            UserInfo userTemp = userInfoMapper.selectByPrimaryKey(userInfo);
+            if (userTemp != null) {
                 //用户信息更改
-                if(!StringUtils.equals(JSONObject.toJSONString(userInfo),JSONObject.toJSONString(userTemp)))
-                {
+                if (!StringUtils.equals(JSONObject.toJSONString(userInfo), JSONObject.toJSONString(userTemp))) {
                     userInfoMapper.updateByPrimaryKeySelective(userInfo);
                 }
-            }
-            else
-            {
+            } else {
                 userInfo.setTime(new Date());
                 //插入新用户
                 userInfoMapper.insert(userInfo);
             }
             return userInfo;
-        }
-        else
-        {
+        } else {
             //抛出异常
             throw new UserException("验证失败");
         }
