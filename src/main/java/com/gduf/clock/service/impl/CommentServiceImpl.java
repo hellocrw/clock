@@ -46,61 +46,74 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+
     public void uploadImage(MultipartFile[] files, String commentMap,String openId) {
         //保存图片
-        upload(files, imgPath);
-        ImageInfo imageInfo = ImageInfo.builder()
-                .commentMap(commentMap)
-                .id(UUID.randomUUID().toString())
-                .openId(openId)
-                .time(new Date())
-                .build();
-        imageInfoMapper.insert(imageInfo);
+        String[] fileNames=upload(files, imgPath);
+        for(String fileName:fileNames) {
+            ImageInfo imageInfo = ImageInfo.builder()
+                    .commentMap(commentMap)
+                    .id(UUID.randomUUID().toString())
+                    .openId(openId)
+                    .imgPath(fileName)
+                    .time(new Date())
+                    .build();
+            imageInfoMapper.insert(imageInfo);
+        }
     }
 
     @Override
     public void uploadVideo(MultipartFile[] files, String commentMap,String openId) {
         //保存录像
-        upload(files, videoPath);
-        VideoInfo videoInfo = VideoInfo.builder()
-                .commentMap(commentMap)
-                .id(UUID.randomUUID().toString())
-                .openId(openId)
-                .time(new Date())
-                .build();
-        videoInfoMapper.insert(videoInfo);
+        String[] fileNames=upload(files, videoPath);
+        for(String fileName:fileNames) {
+            VideoInfo videoInfo = VideoInfo.builder()
+                    .commentMap(commentMap)
+                    .id(UUID.randomUUID().toString())
+                    .openId(openId)
+                    .videoPath(fileName)
+                    .time(new Date())
+                    .build();
+            videoInfoMapper.insert(videoInfo);
+        }
+
+
     }
 
     @Override
     public void uploadSpeech(MultipartFile[] files, String commentMap,String openId) {
         //保存语音
-        upload(files, speechPath);
-        SpeechInfo speechInfo = SpeechInfo.builder()
-                .commentMap(commentMap)
-                .id(UUID.randomUUID().toString())
-                .openId(openId)
-                .time(new Date())
-                .build();
-        speechInfoMapper.insert(speechInfo);
+        String[] fileNames=upload(files, speechPath);
+        for(String fileName:fileNames){
+            SpeechInfo speechInfo = SpeechInfo.builder()
+                    .commentMap(commentMap)
+                    .id(UUID.randomUUID().toString())
+                    .openId(openId)
+                    .speechPath(fileName)
+                    .time(new Date())
+                    .build();
+            speechInfoMapper.insert(speechInfo);
+        }
+
     }
 
 
-    public void upload(MultipartFile[] files, String uploadPath) {
+    public String[] upload(MultipartFile[] files, String uploadPath) {
+        String[] fileNames=new String[files.length];
         //多文件上传
         if (files != null && files.length >= 1) {
             BufferedOutputStream bw = null;
 
             try {
-                for (MultipartFile file : files) {
-                    String fileName = file.getOriginalFilename();
+                for(int i=0;i<files.length;i++) {
+                    fileNames[i] = files[i].getOriginalFilename();
 
                     //判断是否有文件(实际生产中要判断是否是音频文件)
-                    if (StringUtil.isNotEmpty(fileName)) {
+                    if (StringUtil.isNotEmpty(fileNames[i])) {
                         //创建输出文件对象
-                        File outFile = new File(uploadPath + fileName);
+                        File outFile = new File(uploadPath + fileNames);
                         //拷贝文件到输出文件对象
-                        FileUtils.copyInputStreamToFile(file.getInputStream(), outFile);
+                        FileUtils.copyInputStreamToFile(files[i].getInputStream(), outFile);
                     }
                 }
 
@@ -114,7 +127,9 @@ public class CommentServiceImpl implements CommentService {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
         }
+            return fileNames;
     }
 }
