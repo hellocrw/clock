@@ -10,8 +10,6 @@ import com.gduf.clock.service.CommentService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.util.StringUtil;
 
@@ -76,8 +74,6 @@ public class CommentServiceImpl implements CommentService {
                     .build();
             videoInfoMapper.insert(videoInfo);
         }
-
-
     }
 
     @Override
@@ -111,7 +107,7 @@ public class CommentServiceImpl implements CommentService {
                     //判断是否有文件(实际生产中要判断是否是音频文件)
                     if (StringUtil.isNotEmpty(fileNames[i])) {
                         //创建输出文件对象
-                        File outFile = new File(uploadPath + fileNames);
+                        File outFile = new File(uploadPath + fileNames[i]);
                         //拷贝文件到输出文件对象
                         FileUtils.copyInputStreamToFile(files[i].getInputStream(), outFile);
                     }
