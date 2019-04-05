@@ -1,14 +1,14 @@
 package com.gduf.clock.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
+import javax.persistence.*;
 
 @Table(name = "user_info")
 @Data
+@Builder
 public class UserInfo {
     @Id
     @Column(name = "open_id")

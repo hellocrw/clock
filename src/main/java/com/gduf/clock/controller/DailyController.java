@@ -25,8 +25,8 @@ public class DailyController {
 
     private DailyService dailyService;
 
-    public DailyController(DailyServiceImpl commentService) {
-        this.dailyService = commentService;
+    public DailyController(DailyServiceImpl dailyService) {
+        this.dailyService = dailyService;
 
     }
     @Value("${web.upload.image.type}")
