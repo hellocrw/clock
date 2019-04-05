@@ -13,11 +13,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 public class WebConfiguration extends WebMvcConfigurerAdapter {
-    @Value("${web.upload.imgPath}")
-    private String imgPath;
-    @Value("${web.upload.videoPath}")
+    @Value("${web.upload.image.path}")
+    private String imagePath;
+    @Value("${web.upload.video.path}")
     private String videoPath;
-    @Value("${web.upload.speechPath}")
+    @Value("${web.upload.speech.path}")
     private String speechPath;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -25,7 +25,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         //上传的图片在D盘下的OTA目录下，访问路径如：http://localhost:8081/OTA/d3cf0281-bb7f-40e0-ab77-406db95ccf2c.jpg
         //其中OTA表示访问的前缀。"file:D:/OTA/"是文件真实的存储路径
-        registry.addResourceHandler("/img/**").addResourceLocations("file:"+imgPath);
+        registry.addResourceHandler("/image/**").addResourceLocations("file:"+imagePath);
         registry.addResourceHandler("/video/**").addResourceLocations("file:"+videoPath);
         registry.addResourceHandler("/speech/**").addResourceLocations("file:"+speechPath);
     }

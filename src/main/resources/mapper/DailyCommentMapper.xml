@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gduf.clock.dao.DiaryCommentMapper">
-  <resultMap id="BaseResultMap" type="com.gduf.clock.entity.DiaryComment">
+<mapper namespace="com.gduf.clock.dao.DailyCommentMapper">
+  <resultMap id="BaseResultMap" type="com.gduf.clock.entity.DailyComment">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <id column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="daily_map" jdbcType="VARCHAR" property="dailyMap" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
-    <result column="comment_map" jdbcType="VARCHAR" property="commentMap" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
   </resultMap>
 </mapper>

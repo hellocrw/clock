@@ -3,7 +3,6 @@ package com.gduf.clock.service.impl;
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.gduf.clock.core.UserInfoDecode;
-import com.gduf.clock.dao.UserInfoMapper;
 import com.gduf.clock.entity.UserInfo;
 import com.gduf.clock.exception.UserException;
 import com.gduf.clock.service.UserService;

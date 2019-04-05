@@ -31,7 +31,9 @@
 
         <!--<table tableName="user_info"/> -->
 
-        <table tableName="video_info"/>
-        <table tableName="speech_info"/>
+        <table tableName="daily_comment"/>
+        <table tableName="daily_record"/>
+        <table tableName="daily_likes"/>
+        <table tableName="daily_record"/>
     </context>
 </generatorConfiguration>

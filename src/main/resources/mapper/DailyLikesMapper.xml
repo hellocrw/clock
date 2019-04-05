@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gduf.clock.dao.DailyLikesMapper">
+  <resultMap id="BaseResultMap" type="com.gduf.clock.entity.DailyLikes">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="open_id" jdbcType="VARCHAR" property="openId" />
+    <id column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="daily_map" jdbcType="VARCHAR" property="dailyMap" />
+  </resultMap>
+</mapper>

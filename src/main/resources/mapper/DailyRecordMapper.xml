@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gduf.clock.dao.SpeechInfoMapper">
-  <resultMap id="BaseResultMap" type="com.gduf.clock.entity.SpeechInfo">
+<mapper namespace="com.gduf.clock.dao.DailyRecordMapper">
+  <resultMap id="BaseResultMap" type="com.gduf.clock.entity.DailyRecord">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="daily_map" jdbcType="VARCHAR" property="dailyMap" />
-    <result column="speech_path" jdbcType="VARCHAR" property="speechPath" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="insist_day" jdbcType="INTEGER" property="insistDay" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
 </mapper>
