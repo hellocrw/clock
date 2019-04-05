@@ -7,6 +7,7 @@ import com.gduf.clock.vo.Result;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import tk.mybatis.mapper.util.StringUtil;
 
 
 @RestController
+@Slf4j
 public class DailyController {
 
     private DailyService dailyService;
@@ -59,6 +61,7 @@ public class DailyController {
             }
 
         } catch (Exception e) {
+            log.info(e.toString());
             return new ResponseEntity(new Result("上传失败"), HttpStatus.FAILED_DEPENDENCY);
         }
 
@@ -86,6 +89,7 @@ public class DailyController {
                 dailyService.upContent(openId,dailyMap,content);
             }
         } catch (Exception e) {
+            log.info(e.toString());
             return new ResponseEntity(new Result("提交失败"), HttpStatus.FAILED_DEPENDENCY);
         }
         Result result = new Result(200, "success");
