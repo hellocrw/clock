@@ -33,6 +33,12 @@ mybatis:
 
 web:
   upload:
-    imgPath: e://wechat//img//
-    videoPath: e://wechat//video//
-    speechPath: e://wechat//speech//
+    image:
+      path: e://wechat//image//
+      type: 1
+    video:
+      path: e://wechat//video//
+      type: 2
+    speech:
+      path: e://wechat//speech//
+      type: 3

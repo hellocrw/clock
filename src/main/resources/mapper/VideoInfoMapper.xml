@@ -7,7 +7,7 @@
     -->
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
-    <result column="comment_map" jdbcType="VARCHAR" property="commentMap" />
+    <result column="daily_map" jdbcType="VARCHAR" property="dailyMap" />
     <result column="video_path" jdbcType="VARCHAR" property="videoPath" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>

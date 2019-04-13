@@ -6,22 +6,26 @@ import lombok.Data;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "image_info")
+@Table(name = "daily_likes")
 @Data
 @Builder
-public class ImageInfo {
+public class DailyLikes {
     @Id
-    private String id;
-
     @Column(name = "open_id")
     private String openId;
+
+    @Id
+    private Date time;
+
+    private String id;
+
+    @Column(name = "nick_name")
+    private String nickName;
+
+    private Integer likes;
 
     @Column(name = "daily_map")
     private String dailyMap;
 
-    @Column(name = "img_path")
-    private String imgPath;
-
-    private Date time;
 
 }

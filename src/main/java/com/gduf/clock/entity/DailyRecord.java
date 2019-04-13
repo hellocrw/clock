@@ -6,22 +6,24 @@ import lombok.Data;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "image_info")
+@Table(name = "daily_record")
 @Data
 @Builder
-public class ImageInfo {
+public class DailyRecord {
     @Id
     private String id;
-
-    @Column(name = "open_id")
-    private String openId;
 
     @Column(name = "daily_map")
     private String dailyMap;
 
-    @Column(name = "img_path")
-    private String imgPath;
+    @Column(name = "open_id")
+    private String openId;
+
+    @Column(name = "insist_day")
+    private Integer insistDay;
 
     private Date time;
+
+    private String content;
 
 }
